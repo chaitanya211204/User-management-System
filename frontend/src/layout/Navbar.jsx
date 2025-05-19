@@ -1,43 +1,50 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom';
-
-// export default function Navbar() {
-//   return (
-//     <div>
-//       <nav className="navbar navbar-expand-lg navbar-dark bg-black text-center">
-//             <div className="container-fluid">
-//                 <Link className="navbar-brand " to={"/"}>User Management System</Link>
-//                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-//                 <span className="navbar-toggler-icon"></span>
-//                 </button>
-
-//                 <Link className='btn btn-outline-light text-white-500' to = "/addUser"> Add User</Link>
-//             </div>
-//         </nav>
-//     </div>
-//   );
-// }
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import './navbar.css'; // optional for further style tuning
 
 export default function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [role, setRole] = useState(null);
+  const navigate = useNavigate();
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.style.backgroundColor = isDarkMode ? 'white' : '#2a2a72'; // Dark Mode bg
-    document.body.style.color = isDarkMode ? '#2a2a72' : 'aliceblue'; // Dark mode text
+  useEffect(() => {
+    const storedRole = localStorage.getItem('role');
+    setRole(storedRole);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    setRole(null);
+    navigate('/login');
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg ${isDarkMode ? 'navbar-dark' : 'navbar-light'} shadow-sm`} style={{ backgroundColor: isDarkMode ? '#2a2a72' : 'white', borderBottom: '2px solid #2a2a72' }}>
+    <motion.nav
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, type: 'spring', stiffness: 70 }}
+      className="navbar navbar-expand-lg navbar-dark shadow-sm"
+      style={{
+        background: 'linear-gradient(to right, #0f0f0f, #3a3a3a)',
+        borderBottom: '1px solid #666',
+        padding: '0.7rem 1.5rem',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+      }}
+    >
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold" to="/" style={{ color: isDarkMode ? 'aliceblue' : '#2a2a72', fontSize: '1.5rem' }}>
-          User Management System
+        <Link
+          className="navbar-brand fw-bold text-white"
+          to="/"
+          style={{ fontSize: '1.6rem', letterSpacing: '1px' }}
+        >
+        AccessPro
         </Link>
+
         <button
-          className="navbar-toggler"
+          className="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -47,55 +54,46 @@ export default function Navbar() {
         >
           <span className="navbar-toggler-icon" />
         </button>
+
         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          {/* Dropdown for user-related actions */}
-          <ul className="navbar-nav mb-2 mb-lg-0">
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{ color: isDarkMode ? 'aliceblue' : '#2a2a72' }}
-              >
-                User
-              </Link>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/login" style={{ color: '#2a2a72' }}>
+          <ul className="navbar-nav mb-2 mb-lg-0 align-items-center gap-3">
+            {role ? (
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle text-white"
+                  to="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {role}
+                </Link>
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  <li>
+                    <button className="dropdown-item text-danger" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link text-white" to="/login">
                     Login
                   </Link>
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/register" style={{ color : '#2a2a72' }}>
+                <li className="nav-item">
+                  <Link className="nav-link text-white" to="/register">
                     Register
                   </Link>
                 </li>
-              </ul>
-            </li>
+              </>
+            )}
           </ul>
-
-          {/* Add User Button */}
-          <Link
-            className="btn btn-outline-primary rounded-pill px-4 fw-semibold mx-2"
-            to="/addUser"
-            style={{ borderColor: isDarkMode ? 'aliceblue' : '#2a2a72', color: isDarkMode ? 'aliceblue' : '#2a2a72' }}
-          >
-            Add User
-          </Link>
-
-          {/* Dark Mode Toggle */}
-          <button
-            className="btn btn-outline-light rounded-circle p-2"
-            onClick={toggleDarkMode}
-            style={{ backgroundColor: isDarkMode ? '#2a2a72' : 'white', color: isDarkMode ? 'aliceblue' : '#2a2a72' }}
-          >
-            <i className={`bi ${isDarkMode ? 'bi-sun' : 'bi-moon'}`} style={{ fontSize: '1.5rem' }} />
-          </button>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

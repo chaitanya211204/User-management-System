@@ -1,73 +1,3 @@
-// import axios from 'axios'
-// import React, { useEffect } from 'react'
-// import { useState } from 'react'
-// import { Link, useNavigate, useParams } from 'react-router-dom'
-
-// export default function EditUser() {
-//   let navigate = useNavigate();
-
-//     const {id} = useParams();
-
-//   const [user, setUser] = useState({
-//       username: "",
-//       firstname: "",
-//       lastname:"",
-//       email:""
-//     })
-
-//   const {username, firstname, lastname, email} = user
-  
-//   const onInput = (e) => {
-//     setUser({...user,[e.target.name]: e.target.value})
-//   }
-
-//   useEffect(() => {
-//     loadUser()
-//   },[]);
-
-//   const onsubmit = async(e) => {
-//     e.preventDefault();
-//     await axios.put(`http://localhost:8080/api/users/${id}`,user)
-//     navigate("/")
-//   }
-
-//   const loadUser = async () => {
-//     const result = await axios.get(`http://localhost:8080/api/getusers/${id}`)
-//     setUser(result.data);
-//   }
-
-//   return (
-//     <div className='container'>
-//       <div className="row">
-//         <div className='col md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
-//             <h2 className='text-center m-4'>Edit User </h2>
-//             <form onSubmit={(e) => onsubmit(e)}>
-//               <div className='mb-3'>
-//                 <label htmlFor='USerName' className='form-label'>UserName</label>
-//                 <input type='text' className='form-control' placeholder='Jan Doe' name='username' value={username} onChange={(e) => onInput(e)}></input>
-//               </div>
-//               <div className='mb-3'>
-//                 <label htmlFor='FirstName' className='form-label'>FirstName</label>
-//                 <input type='text' className='form-control' placeholder='Jan' name='firstname' value={firstname} onChange={(e) => onInput(e)}></input>
-//               </div>
-//               <div className='mb-3'>
-//                 <label htmlFor='lastName' className='form-label'>LastName</label>
-//                 <input type='text' className='form-control' placeholder='Doe' name='lastname' value={lastname} onChange={(e) => onInput(e)}></input>
-//               </div>
-//               <div className='mb-3'>
-//                 <label htmlFor='Email' className='form-label'>Email</label>
-//                 <input type='text' className='form-control' placeholder='jan21doe@gmail.com' name='email' value={email} onChange={(e) => onInput(e)}></input>
-//               </div>
-//               <button type='submit' className='btn btn-outline-primary'>Submit</button>
-//               <Link type='submit' className='btn btn-outline-danger' to = "/">Cancel </Link>
-//             </form>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
@@ -90,7 +20,7 @@ export default function EditUser() {
   };
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/api/getusers/${id}`);
+    const result = await axios.get(`http://localhost:8080/api/admin/getusers/${id}`);
     setUser(result.data);
   };
 
@@ -100,8 +30,8 @@ export default function EditUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/api/users/${id}`, user);
-    navigate('/');
+    await axios.put(`http://localhost:8080/api/admin/users/${id}`, user);
+    navigate('/home');
   };
 
   return (

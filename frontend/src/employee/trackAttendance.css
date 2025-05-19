@@ -1,0 +1,55 @@
+/* Full-screen centered layout with gradient */
+.attendance-fullpage {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #1f1f1f, #3c3c3c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Centered card wrapper */
+.calendar-wrapper {
+  text-align: center;
+  padding: 30px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Title styling */
+.calendar-title {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Calendar styles */
+.custom-calendar {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.react-calendar__tile {
+  background-color: transparent;
+  color: white;
+  border-radius: 8px;
+}
+
+/* .react-calendar__tile--now {
+  background-color: #666 !important;
+} */
+
+.react-calendar__tile--active {
+  background-color: #333 !important;
+  color: white;
+}
+
+.present-day {
+  background-color: #bf1a2f !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+}

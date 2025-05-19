@@ -1,0 +1,43 @@
+.update-profile-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #0f0f0f, #3a3a3a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.update-profile-card {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+.form-input {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  color: #ddd;
+}
+
+.form-input:focus {
+  background-color: #2a2a2a;
+  border-color: #007bff;
+  box-shadow: 0 0 8px #007bff;
+  color: #fff;
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.btn-gradient:hover,
+.btn-gradient:focus {
+  background: linear-gradient(45deg, #00d4ff, #007bff);
+  box-shadow: 0 0 12px #00d4ff;
+  color: white;
+}

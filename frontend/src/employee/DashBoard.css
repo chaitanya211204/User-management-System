@@ -1,0 +1,13 @@
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a3b);
+  color: #f1f1f1;
+  padding: 2rem;
+}
+
+/* Optional: Card styling for contrast */
+.dashboard-card {
+  background-color: #2d2d3a;
+  border: none;
+  color: #ffffff;
+}
