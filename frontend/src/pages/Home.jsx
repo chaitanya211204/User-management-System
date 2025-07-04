@@ -174,7 +174,7 @@ export default function Home() {
                 <td>{user.firstname}</td>
                 <td>{user.email}</td>
                 <td className="d-flex flex-wrap gap-2">
-                  <Link className="btn btn-sm btn-outline-primary" to={`viewUser/${user.id}`}>
+                  <Link className="btn btn-sm btn-outline-primary" to={`/viewUser/${user.id}`}>
                     View
                   </Link>
                   <Link className="btn btn-sm btn-outline-warning" to={`/editUser/${user.id}`}>

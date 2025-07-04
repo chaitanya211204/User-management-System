@@ -54,45 +54,6 @@ export default function Navbar() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-
-        <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <ul className="navbar-nav mb-2 mb-lg-0 align-items-center gap-3">
-            {role ? (
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle text-white"
-                  to="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {role}
-                </Link>
-                <ul className="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <button className="dropdown-item text-danger" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link text-white" to="/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link text-white" to="/register">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
       </div>
     </motion.nav>
   );

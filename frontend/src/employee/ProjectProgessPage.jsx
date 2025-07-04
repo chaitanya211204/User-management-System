@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../project/Header.jsx';
 import ProjectOverview from '../project/ProjectOverview';
-import ProgressBar from '../project/ProgressBar';
 import TaskList from '../project/TaskList';
 import MilestoneList from '../project/MileStoneList';
 import ActivityFeed from '../project/ActivityFeed';
@@ -14,16 +13,12 @@ const sampleData = {
   progress: 65,
   tasks: [
     { id: 1, title: "Setup Backend", assignee: "Khushi", deadline: "May 20", status: "Complete" },
-    { id: 2, title: "Build Frontend", assignee: "You", deadline: "May 25", status: "In Progress" },
-    { id: 3, title: "Write Tests", assignee: "—", deadline: "June 5", status: "Pending" }
   ],
   milestones: [
     { id: 1, title: "Backend Complete", status: "Done" },
-    { id: 2, title: "Frontend Ready", status: "In Progress" }
   ],
   activity: [
     "Khushi completed 'Setup Backend'",
-    "You updated 'Build Frontend' deadline"
   ]
 };
 
@@ -35,7 +30,6 @@ const ProjectProgressPage = () => (
       startDate={sampleData.startDate}
       endDate={sampleData.endDate}
     />
-    <ProgressBar percentage={sampleData.progress} />
     <TaskList tasks={sampleData.tasks} />
     <MilestoneList milestones={sampleData.milestones} />
     <ActivityFeed activities={sampleData.activity} />

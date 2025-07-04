@@ -1,13 +1,165 @@
-.dashboard-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1e1e2f, #2a2a3b);
-  color: #f1f1f1;
-  padding: 2rem;
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #666666 !important;
+  height: 100%; 
 }
 
-/* Optional: Card styling for contrast */
-.dashboard-card {
-  background-color: #2d2d3a;
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: transparent; /* Make sure nothing overrides body */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: transparent !important; /* Ensures full background is dark */
+}
+
+/* Sidebar Glassmorphism */
+.sidebar {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 15px 10px;
+  width: 60px;
+  height: 600px;
+  margin-top: 40px;
+  margin-right: 30px;
+  margin-left: 20px;
+  transition: width 0.3s;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+}
+
+.sidebar:hover {
+  width: 250px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.user-photo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Sidebar Icons */
+.sidebar-options .icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 15px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.sidebar-options .icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Header buttons */
+.header-actions .btn {
+  background-color: rgba(255, 255, 255, 0.08);
   border: none;
-  color: #ffffff;
+  color: white;
+  margin-left: 10px;
+}
+
+/* Cards Layout */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  gap: 50px;
+}
+
+/* Card Styling */
+.card.transparent-card {
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  font-weight: 400rem;
+}
+
+/* Notices */
+.card ul.notices {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul.notices li {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card ul.notices span {
+  float: right;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* View All Button */
+.btn.view-all {
+  background: transparent;
+  border: 1px solid #f2bb57;
+  color: #f2bb57;
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn.view-all:hover {
+  background-color: #f2bb57;
+  color: #22263f;
+}
+
+.card.transparent-card {
+  background: rgba(255, 255, 255, 0.08); /* semi-transparent */
+  backdrop-filter: blur(12px); /* glass effect */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.card.transparent-card:hover {
+  transform: scale(1.02);
+}
+
+.transparent-card {
+  border: 1px solid rgba(255, 255, 255, 0.15); /* frosted border */
 }

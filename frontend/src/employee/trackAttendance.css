@@ -1,55 +1,138 @@
-/* Full-screen centered layout with gradient */
-.attendance-fullpage {
+/* TrackAttendance.css */
+
+.attendance-container {
   height: 100vh;
-  width: 100vw;
-  background: linear-gradient(135deg, #1f1f1f, #3c3c3c);
   display: flex;
-  justify-content: center;
+  overflow: hidden;
+}
+
+.attendance-left {
+  flex: 1;
+  height: 100%;
+  background-color: #e6e6e9;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 20px;
-}
-
-/* Centered card wrapper */
-.calendar-wrapper {
+  justify-content: center;
   text-align: center;
-  padding: 30px;
-  border-radius: 16px;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
-/* Title styling */
-.calendar-title {
-  color: white;
-  margin-bottom: 20px;
+.attendance-right {
+  flex: 1;
+  background-color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Calendar styles */
-.custom-calendar {
-  background-color: transparent;
+.glass-calendar-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 440px;
+}
+
+
+/* Custom calendar tile styling */
+.react-calendar__tile.present-day {
+  /* background-color: #1dd1a1 !important; */
   color: white;
+  border-radius: 8px;
+}
+
+.react-calendar__tile.absent-day {
+  background-color: #ff6b6b !important;
+  color: white;
+  border-radius: 8px;
+}
+
+.attendance-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.summary-card {
+  background: white;
+  color: #333;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 220px;
+}
+
+/* Calendar overrides */
+.react-calendar {
+  width: 100%;
+  max-width: 400px;
   border: none;
+  background: transparent;
+  color: #fff;
 }
 
 .react-calendar__tile {
-  background-color: transparent;
-  color: white;
-  border-radius: 8px;
+  padding: 14px 0;
+  margin: 2px;
+  transition: all 0.3s ease;
+  border-radius: 12px;
 }
 
-/* .react-calendar__tile--now {
-  background-color: #666 !important;
-} */
+.react-calendar__tile--now {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid #fff;
+}
+
+
+.react-calendar__tile:enabled:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
 
 .react-calendar__tile--active {
-  background-color: #333 !important;
-  color: white;
+  background-color: #74b9ff !important;
+  color: white !important;
 }
 
+
 .present-day {
-  background-color: #bf1a2f !important;
-  color: white !important;
-  font-weight: bold;
-  border-radius: 8px;
+  /* background-color: rgba(0, 255, 100, 0.15); Lighter green */
+  color: #fff;
+}
+.absent-day {
+  /* background-color: rgba(255, 0, 0, 0.35); Soft red */
+  color: #fff;
+}
+
+.react-calendar__tile:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.react-calendar__month-view__days {
+  gap: 0.75rem;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+}
+
+
+@media (max-width: 768px) {
+  .attendance-container {
+    flex-direction: column;
+  }
+
+  .attendance-left, .attendance-right {
+    flex: unset;
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .glass-calendar-wrapper {
+    max-width: 90vw;
+  }
 }
