@@ -65,14 +65,21 @@ cd hr-management-system
 Below are some screenshots of the project UI:  
 
 ### Sign-in
-![Sign-in](screenshots/Screenshot(141).png)
+![sign](screenshots/sign.png)
 
 ### Login
-![Login](screenshots/Screenshot(142).png)
+![login](screenshots/login.png)
 
 ### Admin-Dashboard
-![Admin](screenshots/Screenshot(143).png)
+![admin](screenshots/admin.png)
 
 ### User-Dashboard
-![User](screenshots/Screenshot(144).png)
+![user](screenshots/user.png)
+
+### Reset Password
+![reset](screenshots/reset.png)
+
+### Update Profile
+![update](screenshots/update.png)
+
 
