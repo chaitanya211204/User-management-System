@@ -64,10 +64,15 @@ cd hr-management-system
 
 Below are some screenshots of the project UI:  
 
-| Sign-in |
-|-----------|-------------|--------------------|
-![Sign-in](screenshots/Screenshot(141).png
+### Sign-in
+![Sign-in](screenshots/Screenshot(141).png)
 
-Login
-![Log-in](screenshots/Screenshot(142).png
+### Login
+![Login](screenshots/Screenshot(142).png)
+
+### Admin-Dashboard
+![Admin](screenshots/Screenshot(143).png)
+
+### User-Dashboard
+![User](screenshots/Screenshot(144).png)
 
