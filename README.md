@@ -58,3 +58,13 @@ It provides role-based access, secure authentication using **JWT**, and features
 ```bash
 git clone https://github.com/your-username/hr-management-system.git
 cd hr-management-system
+```
+
+## 📸 Screenshots  
+
+Below are some screenshots of the project UI:  
+
+| Dashboard | Admin Panel | Attendance Tracker |
+|-----------|-------------|--------------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Admin Panel](screenshots/admin-panel.png) | ![Attendance Tracker](screenshots/attendance-tracker.png) |
+
