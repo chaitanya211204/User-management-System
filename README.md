@@ -76,3 +76,10 @@ Below are some screenshots of the project UI:
 ### User-Dashboard
 ![user](screenshots/user.png)
 
+### Reset Password
+![reset](screenshots/reset.png)
+
+### Update Profile
+![update](screenshots/update.png)
+
+
