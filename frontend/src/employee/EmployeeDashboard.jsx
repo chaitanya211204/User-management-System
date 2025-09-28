@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaCalendarAlt, FaProjectDiagram, FaMoneyBill, FaUpload, FaLock, FaSignOutAlt } from 'react-icons/fa';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
-import './dashboard.css'; // We'll write styling here
-import UpdateProfileForm from './UpdateProfileForm';
-import { Navigate, redirect } from 'react-router-dom';
+import './dashboard.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const leaveData = [
   { name: 'Taken', value: 8, color: '#ff6b6b' },
@@ -11,53 +11,91 @@ const leaveData = [
 ];
 
 const EmployeeDashboard = () => {
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-  const [activeSection, setActiveSection] = useState('dashboard');
 
-  const toggleSidebar = () => setSidebarExpanded(!sidebarExpanded);
+  const [activeSection, setActiveSection] = useState('dashboard');
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get('http://localhost:8080/api/auth/dashboard', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        setUser(res.data.employeeDTO);
+        console.log(res.data.employeeDTO);
+        console.log(res.data.employeeDTO.fileAddress);
+        
+      } catch (error) {
+        console.error("Failed to fetch user data", error);
+        navigate('/login');
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  if (!user) return <p className="text-center text-light mt-5">Loading dashboard...</p>;
 
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
-      <div className={`sidebar ${sidebarExpanded ? 'expanded' : ''}`} onMouseEnter={toggleSidebar} onMouseLeave={toggleSidebar}>
+      <div
+        className={"sidebar"}
+      >
         <div className="profile">
-          <img src="/user.png" alt="User" className="user-photo" />
-          {sidebarExpanded && <p className="user-name">John Doe</p>}
+          {user && user.fileAddress && (
+            <img
+              src={`http://localhost:8080${user.fileAddress}`}
+              alt="User"
+              className="user-photo"
+            />
+          )}
+          {<p className="user-name">{user.firstname}</p>}
         </div>
         <div className="sidebar-options">
-          <a className="icon" href='/update-profile'> <FaUser/> {sidebarExpanded && 'Update Profile'} </a>
-          <a className="icon" href='/attendance'> <FaCalendarAlt /> {sidebarExpanded && 'Track Attendance'} </a>
-          <a className="icon" href='/project-progress'> <FaProjectDiagram /> {sidebarExpanded && 'Project Progress'} </a>
-          <a className="icon" href='/salary'> <FaMoneyBill /> {sidebarExpanded && 'Salary Pay'} </a>
-          <a className="icon" href='/upload-docx' > <FaUpload /> {sidebarExpanded && 'Upload Documents'} </a>
+          <Link className="icon" to="/update-profile"> <FaUser /> {'Update Profile'} </Link>
+          <Link className="icon" to="/attendance"> <FaCalendarAlt /> {'Track Attendance'} </Link>
+          <Link className="icon" to="/project-progress"> <FaProjectDiagram /> {'Project Progress'} </Link>
+          <Link className="icon" to="/salary"> <FaMoneyBill /> {'Salary Pay'} </Link>
+          <Link className="icon" to="/upload-docx"> <FaUpload /> Upload Documents </Link>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="main-content text-light">
+      <div className="main-content text-light"> 
         {/* Header */}
         <div className="dashboard-header">
-          <h3>Welcome back, John 👋</h3>
+          <h3>
+            Welcome back, {user.firstname} {user.lastname} 👋
+          </h3>
           <div className="header-actions">
-            <button className="btn text-light"> <FaLock /> Change Password </button>
-            <button className="btn text-light"> <FaSignOutAlt /> Logout </button>
+            <Link className="btn text-light" to= "/reset-password"> <FaLock /> Change Password </Link>
+            <button className="btn text-light" onClick={() => {
+              localStorage.removeItem('token');
+              navigate('/login');
+            }}>
+              <FaSignOutAlt /> Logout
+            </button>
           </div>
         </div>
 
         {/* Cards Section */}
         <div className="cards-container text-light">
-          <div className="card transparent-card text-light">Apply for Leave</div>
-          <div className="card transparent-card text-light">Upcoming Work Anniversaries</div>
-          <div className="card transparent-card text-light">
+          <div className="card transparent-card">Apply for Leave</div>
+          <div className="card transparent-card">Upcoming Work Anniversaries</div>
+          <div className="card transparent-card">
             <h5>Recent HR Notices</h5>
-            <ul className="notices text-light">
+            <ul className="notices">
               <li><strong>Policy Update:</strong> Leave Policy extended. <span>Jul 2</span></li>
               <li><strong>Holiday:</strong> Office closed on Jul 4. <span>Jul 1</span></li>
               <li><strong>Announcement:</strong> New hiring process. <span>Jun 30</span></li>
             </ul>
-            <button className="btn view-all text-light">View All</button>
+            <button className="btn view-all">View All</button>
           </div>
-          <div className="card transparent-card text-light">
+          <div className="card transparent-card">
             <h5>Leave Status</h5>
             <PieChart width={200} height={200}>
               <Pie
@@ -76,8 +114,8 @@ const EmployeeDashboard = () => {
               <Tooltip />
             </PieChart>
           </div>
-          <div className="card transparent-card text-light">Team Members</div>
-          <div className="card transparent-card text-light">Projects Alloted</div>
+          <div className="card transparent-card">Team Members</div>
+          <div className="card transparent-card">Projects Allotted</div>
         </div>
       </div>
     </div>

@@ -1,0 +1,41 @@
+body {
+  background-color: #4b4b4b;
+  color: #fff;
+}
+
+.sidebar {
+  background-color: #3a3a3a;
+  height: 700px;
+  padding: 1rem 1rem;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar-link {
+  color: #fff;
+  display: block;
+  margin: 1rem 0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.sidebar-link:hover {
+  color: #ffc107;
+}
+
+.content {
+  margin-left: 240px;
+  padding: 2rem;
+  background-color: #4b4b4b;
+  min-height: 100vh;
+}
+
+.card-custom {
+  background-color: #5c5c5c;
+  border: none;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

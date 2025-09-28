@@ -1,12 +1,59 @@
-# React + Vite
+🧑‍💼 **HR Management System**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack **HR Management System** built with **React** (frontend) and **Spring Boot** (backend).  
+It provides role-based access, secure authentication using **JWT**, and features for both employees and admins to manage HR activities efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 🔐 Authentication & Authorization  
+- **JWT-based authentication** for secure login.  
+- **Role-based access**:
+  - **Admin**: Full access to HR features.  
+  - **Employee**: Limited access to personal dashboard and resources.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👩‍💻 Employee Dashboard  
+- View and update **profile information**.  
+- **Track attendance**.  
+- **View project progress**.  
+- **Access salary/pay details**.  
+- Upload **documents**.  
+- Apply for **leave**.  
+- View **HR notices**, **team members**, and **work anniversaries**.  
+
+### 🛠️ Admin Features  
+- **View employees** by department and role.  
+- **Add new employees**.  
+- **Post and manage HR notices**.  
+- **Assign projects** to employees.  
+- **Track attendance** of employees.  
+
+---
+
+## 🖥️ Tech Stack  
+
+### Frontend  
+- **React.js**  
+- **Bootstrap** (UI styling)  
+- **JWT integration** for API calls  
+
+### Backend  
+- **Spring Boot**  
+- **Spring Security** (JWT authentication)  
+- **Spring Data JPA**  
+- **MySQL** (Database)  
+
+---
+
+## 🚀 Getting Started  
+
+### Prerequisites  
+- **npm** 
+- **Java** (JDK 17 or above recommended)  
+- **MySQL**  
+
+### Clone the repository  
+```bash
+git clone https://github.com/chaitanya211204/hr-management-system.git
+cd hr-management-system

@@ -1,62 +1,51 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import illustration from '../assets/Status update.svg';
+import axios from 'axios';
+import illustration from '../assets/Reset_password.svg'; // You can replace this with your own SVG
 
-const UpdateProfileForm = () => {
+const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    location: '',
-    designation: '',
-    department: '',
-    hireDate: '',
-    gender: '',
+    newPassword: '',
+    confirmPassword: '',
   });
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formPayload = new FormData();
-
-    // 1. Append JSON blob as "update" part
-    formPayload.append(
-      "update",
-      new Blob([JSON.stringify(formData)], { type: "application/json" })
-    );
-
-    // 2. Append file as "file" part
-    if (profileImage) {
-      formPayload.append("file", profileImage);
+    if (formData.newPassword !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
 
     try {
-      await axios.post("http://localhost:8080/api/auth/update-profile", formPayload, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
-      setSuccess("Profile updated successfully!");
+      await axios.post(
+        'http://localhost:8080/api/auth/reset-password',
+        { password: formData.newPassword },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      setSuccess('Password reset successfully!');
       setError(null);
-      setTimeout(() => navigate("/dashboard"), 2000);
+      setTimeout(() => navigate('/dashboard'), 2000);
     } catch (err) {
-      setError("Failed to update profile.");
+      setError('Failed to reset password.');
       setSuccess(null);
       console.error(err);
     }
   };
-
 
   return (
     <div className="container-fluid vh-100 d-flex p-0">
@@ -67,14 +56,13 @@ const UpdateProfileForm = () => {
       >
         <img
           src={illustration}
-          alt="Update Illustration"
+          alt="Reset Password Illustration"
           className="img-fluid mb-4"
           style={{ maxHeight: '300px' }}
         />
-        <h4 className="text-dark fw-semibold">Keep your profile updated</h4>
+        <h4 className="text-dark fw-semibold">Secure your account</h4>
         <p className="text-muted text-center px-4">
-          Keeping your data current helps streamline HR operations and improve
-          communication.
+          Resetting your password helps protect your personal and professional information.
         </p>
       </div>
 
@@ -84,41 +72,24 @@ const UpdateProfileForm = () => {
         style={{ backgroundColor: '#666666' }}
       >
         <div style={{ width: '100%', maxWidth: '500px' }}>
-          <h2 className="mb-4 fw-bold text-center">UPDATE PROFILE</h2>
+          <h2 className="mb-4 fw-bold text-center">RESET PASSWORD</h2>
 
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
 
           <Form onSubmit={handleSubmit}>
-            {/* File input with filename preview */}
-            <Form.Group className="mb-3">
-              <Form.Label className="text-dark">Profile Picture</Form.Label>
-              <Form.Control
-                type="file"
-                accept="image/*"
-                onChange={(e) => setProfileImage(e.target.files[0])}
-                className="rounded-pill px-4 py-2 text-dark border border-secondary bg-white"
-              />
-              {profileImage && (
-                <small className="text-info mt-2">Selected: {profileImage.name}</small>
-              )}
-            </Form.Group>
-
             {[
-              { label: 'Location', name: 'location' },
-              { label: 'Designation', name: 'designation' },
-              { label: 'Department', name: 'department' },
-              { label: 'Hire Date', name: 'hireDate', type: 'date' },
-              { label: 'Gender', name: 'gender' },
+              { label: 'New Password', name: 'newPassword' },
+              { label: 'Confirm Password', name: 'confirmPassword' },
             ].map((field, index) => (
               <Form.Group className="mb-3 text-dark" key={index}>
                 <Form.Label className="text-dark">{field.label}</Form.Label>
                 <Form.Control
-                  type={field.type || 'text'}
+                  type="password"
                   name={field.name}
                   value={formData[field.name]}
                   onChange={handleChange}
-                  placeholder={`Enter your ${field.label.toLowerCase()}`}
+                  placeholder={`Enter ${field.label.toLowerCase()}`}
                   required
                   className="rounded-pill px-4 py-2 text-dark border border-secondary"
                 />
@@ -126,8 +97,8 @@ const UpdateProfileForm = () => {
             ))}
 
             <div className="d-flex justify-content-between">
-              <Button variant="warning" type="submit" className="fw-bold rounded-pill px-4">
-                Update
+              <Button type="submit" variant="warning" className="fw-bold rounded-pill px-4">
+                Reset
               </Button>
               <Button
                 variant="secondary"
@@ -154,4 +125,4 @@ const UpdateProfileForm = () => {
   );
 };
 
-export default UpdateProfileForm;
+export default ResetPasswordForm;
