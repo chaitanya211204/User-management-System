@@ -64,7 +64,10 @@ cd hr-management-system
 
 Below are some screenshots of the project UI:  
 
-| Dashboard | Admin Panel | Attendance Tracker |
+| Sign-in |
 |-----------|-------------|--------------------|
-| ![Dashboard](screenshots/dashboard.png) | ![Admin Panel](screenshots/admin-panel.png) | ![Attendance Tracker](screenshots/attendance-tracker.png) |
+![Sign-in](screenshots/Screenshot(141).png
+
+Login
+![Log-in](screenshots/Screenshot(142).png
 
